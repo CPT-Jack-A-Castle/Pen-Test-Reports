@@ -47,8 +47,8 @@ do
   shift # past value
 done
 
-touch ./$VM_NAME/$VM_NAME.md
 mkdir -p $VM_NAME/nmap
+touch ./$VM_NAME/$VM_NAME.md
 
 # create template
 
@@ -87,3 +87,7 @@ sudo nmap -Pn -sU --min-rate=10000 -o ./$VM_NAME/nmap/UDP_$VM_NAME $REMOTE_IP
 cat ./$VM_NAME/$VM_NAME.md ./$VM_NAME/nmap/UDP_$VM_NAME >> ./$VM_NAME/$VM_NAME.md
 
 echo "\`\`\`" >> ./$VM_NAME/$VM_NAME.md
+
+# launch obsidian
+
+obsidian ./$VM_NAME/$VM_NAME.md
