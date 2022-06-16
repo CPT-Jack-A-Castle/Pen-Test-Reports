@@ -1,0 +1,10 @@
+# Nmap 7.92 scan initiated Mon Jun 13 22:03:46 2022 as: nmap -Pn -sU --min-rate=10000 -o ./sizzle/nmap/UDP_sizzle 10.10.10.103
+Nmap scan report for 10.10.10.103
+Host is up (0.11s latency).
+Not shown: 997 open|filtered udp ports (no-response)
+PORT    STATE SERVICE
+53/udp  open  domain
+123/udp open  ntp
+389/udp open  ldap
+
+# Nmap done at Mon Jun 13 22:03:47 2022 -- 1 IP address (1 host up) scanned in 0.93 seconds

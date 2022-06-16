@@ -1,0 +1,26 @@
+# Nmap 7.92 scan initiated Thu Jun 16 09:47:13 2022 as: nmap -p 5985,5986 -sV -sT -sC -o nmap-winrm sizzle.htb
+Nmap scan report for sizzle.htb (10.10.10.103)
+Host is up (0.080s latency).
+
+PORT     STATE SERVICE  VERSION
+5985/tcp open  http     Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_http-server-header: Microsoft-HTTPAPI/2.0
+5986/tcp open  ssl/http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-title: Not Found
+|_ssl-date: 2022-06-16T00:46:56+00:00; -1m07s from scanner time.
+| ssl-cert: Subject: commonName=sizzle.HTB.LOCAL
+| Subject Alternative Name: othername:<unsupported>, DNS:sizzle.HTB.LOCAL
+| Not valid before: 2022-06-13T20:49:40
+|_Not valid after:  2023-06-13T20:49:40
+|_http-server-header: Microsoft-HTTPAPI/2.0
+| tls-alpn: 
+|   h2
+|_  http/1.1
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: -1m07s
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Jun 16 09:48:03 2022 -- 1 IP address (1 host up) scanned in 50.53 seconds
