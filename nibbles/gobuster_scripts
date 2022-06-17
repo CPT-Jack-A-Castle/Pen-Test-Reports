@@ -1,0 +1,5 @@
+/content              (Status: 301) [Size: 323] [--> http://10.10.10.75/nibbleblog/content/]
+/themes               (Status: 301) [Size: 322] [--> http://10.10.10.75/nibbleblog/themes/]
+/admin                (Status: 301) [Size: 321] [--> http://10.10.10.75/nibbleblog/admin/]
+/plugins              (Status: 301) [Size: 323] [--> http://10.10.10.75/nibbleblog/plugins/]
+/languages            (Status: 301) [Size: 325] [--> http://10.10.10.75/nibbleblog/languages/]

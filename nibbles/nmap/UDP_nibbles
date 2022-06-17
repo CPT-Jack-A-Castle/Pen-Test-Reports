@@ -1,0 +1,7 @@
+# Nmap 7.92 scan initiated Fri Jun 17 18:58:02 2022 as: nmap -Pn -sU --min-rate=10000 -o ./nibbles/nmap/UDP_nibbles 10.10.10.75
+Nmap scan report for nibbles.htb (10.10.10.75)
+Host is up.
+All 1000 scanned ports on nibbles.htb (10.10.10.75) are in ignored states.
+Not shown: 1000 open|filtered udp ports (no-response)
+
+# Nmap done at Fri Jun 17 18:58:04 2022 -- 1 IP address (1 host up) scanned in 2.19 seconds
