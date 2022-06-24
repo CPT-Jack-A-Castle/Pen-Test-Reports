@@ -1,0 +1,7 @@
+# Nmap 7.92 scan initiated Fri Jun 24 22:55:01 2022 as: nmap -Pn -sU --min-rate=10000 -o ./nineveh/nmap/UDP_nineveh 10.10.10.43
+Nmap scan report for 10.10.10.43
+Host is up.
+All 1000 scanned ports on 10.10.10.43 are in ignored states.
+Not shown: 1000 open|filtered udp ports (no-response)
+
+# Nmap done at Fri Jun 24 22:55:03 2022 -- 1 IP address (1 host up) scanned in 2.19 seconds
